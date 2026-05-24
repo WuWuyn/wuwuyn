@@ -1,0 +1,35 @@
+{
+  "name": "astro-navfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "fonts:ui": "bun scripts/fonts/subset-ui-font.ts",
+    "build": "bun run fonts:ui && astro build && pagefind --site dist --output-subdir pagefind --root-selector main --exclude-selectors \"[data-pagefind-ignore]\"",
+    "preview": "astro preview",
+    "astro": "astro",
+    "post:new": "bun scripts/new-content.ts blog",
+    "vibe:new": "bun scripts/new-content.ts vibe",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@fontsource/maple-mono": "^5.2.6",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.5",
+    "lucide-astro": "^0.556.0",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "pagefind": "^1.5.2",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1"
+  }
+}
