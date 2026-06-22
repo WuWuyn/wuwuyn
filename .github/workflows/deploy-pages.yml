@@ -27,21 +27,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+          cache: npm
 
       - name: Install font subsetting tools
         run: python -m pip install --user fonttools brotli
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: npm ci
 
       - name: Build site
-        env:
-          SITE_URL: https://astro.navfolio.site
-          SITE_BASE: /
-        run: bun run build
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
