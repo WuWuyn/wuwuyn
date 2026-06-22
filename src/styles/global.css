@@ -27,29 +27,29 @@
  */
 
 :root {
-  --black: 35, 39, 35;
-  --gray: 112, 119, 111;
-  --gray-light: 226, 231, 224;
-  --gray-dark: 48, 53, 49;
-  --paper-bg: #fdfdf9;
-  --paper-bg-deep: #f3f5ef;
+  --black: 31, 42, 56;
+  --gray: 98, 112, 132;
+  --gray-light: 223, 233, 244;
+  --gray-dark: 39, 52, 70;
+  --paper-bg: #fbfdff;
+  --paper-bg-deep: #f1f6fb;
   --paper-surface: #fffffc;
-  --paper-surface-muted: #f7f8f3;
+  --paper-surface-muted: #f5f9fd;
   --paper-surface-rgb: 255, 255, 252;
   --paper-line: rgba(31, 35, 40, 0.075);
   --paper-line-strong: rgba(31, 35, 40, 0.12);
-  --paper-ink: #272d28;
-  --paper-ink-soft: #667066;
-  --paper-ink-faint: #90998f;
-  --paper-control: rgba(246, 248, 245, 0.76);
-  --paper-control-hover: rgba(238, 243, 237, 0.92);
+  --paper-ink: #273446;
+  --paper-ink-soft: #627084;
+  --paper-ink-faint: #8a98aa;
+  --paper-control: rgba(245, 249, 253, 0.78);
+  --paper-control-hover: rgba(235, 243, 251, 0.94);
   --paper-nav: rgba(255, 255, 252, 0.92);
   --paper-card-wash-top: rgba(255, 255, 252, 0.78);
-  --paper-card-wash-bottom: rgba(247, 248, 243, 0.52);
-  --paper-page-bg: #fdfdf9;
-  --paper-detail-bg: #fdfdf9;
+  --paper-card-wash-bottom: rgba(245, 249, 253, 0.56);
+  --paper-page-bg: #fbfdff;
+  --paper-detail-bg: #fbfdff;
   --paper-texture-light: rgba(255, 255, 255, 0.18);
-  --paper-theme-color: #fdfdf9;
+  --paper-theme-color: #fbfdff;
   --paper-shadow: 0 1px 2px rgba(31, 35, 40, 0.03), 0 4px 12px rgba(31, 35, 40, 0.02);
   --paper-shadow-lift: 0 1px 2px rgba(31, 35, 40, 0.04), 0 6px 14px rgba(31, 35, 40, 0.025);
   --layout-shell-width: 1168px;
@@ -78,35 +78,35 @@
 }
 
 :root[data-theme='dark'] {
-  --black: 234, 235, 229;
-  --gray: 166, 175, 164;
-  --gray-light: 56, 64, 56;
-  --gray-dark: 225, 229, 221;
-  --paper-bg: #171b18;
-  --paper-bg-deep: #111411;
-  --paper-surface: #202620;
-  --paper-surface-muted: #273026;
-  --paper-surface-rgb: 32, 38, 32;
-  --paper-line: rgba(217, 229, 213, 0.08);
-  --paper-line-strong: rgba(217, 229, 213, 0.14);
-  --paper-ink: #eaebe5;
-  --paper-ink-soft: #b5beb1;
-  --paper-ink-faint: #899487;
-  --paper-control: rgba(42, 51, 43, 0.72);
-  --paper-control-hover: rgba(52, 64, 53, 0.88);
-  --paper-nav: rgba(32, 38, 32, 0.92);
-  --paper-card-wash-top: rgba(39, 47, 39, 0.72);
-  --paper-card-wash-bottom: rgba(28, 33, 28, 0.52);
-  --paper-page-bg: linear-gradient(180deg, rgba(23, 27, 24, 0.98) 0%, rgba(17, 20, 17, 0.98) 100%);
+  --black: 235, 241, 248;
+  --gray: 158, 174, 196;
+  --gray-light: 50, 64, 84;
+  --gray-dark: 225, 235, 247;
+  --paper-bg: #121826;
+  --paper-bg-deep: #0d1320;
+  --paper-surface: #1a2233;
+  --paper-surface-muted: #202b3f;
+  --paper-surface-rgb: 26, 34, 51;
+  --paper-line: rgba(202, 220, 244, 0.08);
+  --paper-line-strong: rgba(202, 220, 244, 0.15);
+  --paper-ink: #ebf1f8;
+  --paper-ink-soft: #b4c2d6;
+  --paper-ink-faint: #8799b4;
+  --paper-control: rgba(32, 43, 63, 0.74);
+  --paper-control-hover: rgba(43, 58, 84, 0.9);
+  --paper-nav: rgba(26, 34, 51, 0.92);
+  --paper-card-wash-top: rgba(30, 40, 60, 0.72);
+  --paper-card-wash-bottom: rgba(17, 24, 38, 0.54);
+  --paper-page-bg: linear-gradient(180deg, rgba(18, 24, 38, 0.98) 0%, rgba(13, 19, 32, 0.98) 100%);
   --paper-detail-bg: linear-gradient(
     180deg,
-    rgba(23, 27, 24, 0.98) 0%,
-    rgba(17, 20, 17, 0.98) 100%
+    rgba(18, 24, 38, 0.98) 0%,
+    rgba(13, 19, 32, 0.98) 100%
   );
   --paper-texture-light: rgba(255, 255, 255, 0.035);
   --paper-shadow: 0 1px 2px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.08);
   --paper-shadow-lift: 0 1px 2px rgba(0, 0, 0, 0.16), 0 6px 14px rgba(0, 0, 0, 0.1);
-  --paper-theme-color: #171b18;
+  --paper-theme-color: #121826;
   color-scheme: dark;
 }
 body {

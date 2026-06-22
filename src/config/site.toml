@@ -3,13 +3,14 @@ title = "wuwuyn"
 description = "Data Science, data analysis, and personal notes from wuwuyn."
 pageTitle = "wuwuyn | Personal Notebook"
 pageDescription = "A calm personal space for data notes, machine learning practice, and learning logs from wuwuyn."
-repository = ""
+repository = "https://github.com/WuWuyn/wuwuyn"
 footerNote = "A quiet personal notebook."
+templateCredit = "Template inspired by Astro Navfolio."
 
 [config.theme]
 # Available palettes:
 # green-soft, green-vivid, rose-soft, pink-soft, purple-soft, blue-soft, orange-soft, brown-soft
-palette = "green-soft"
+palette = "blue-soft"
 
 [config.comments]
 enabled = false
@@ -36,7 +37,7 @@ reactions_enabled = "1"
 emit_metadata = "0"
 input_position = "top"
 theme = "preferred_color_scheme"
-lang = "vi"
+lang = "en"
 loading = "lazy"
 
 [config.comments.utterances]
@@ -47,7 +48,7 @@ theme = "github-light"
 
 [config.comments.waline]
 server_url = ""
-lang = "vi"
+lang = "en"
 dark = "html.dark"
 pageview = true
 comment = true
@@ -125,7 +126,7 @@ href = "/about"
 
 [[config.home.connect]]
 label = "GitHub"
-href = "https://github.com/WuWuyn"
+href = "https://github.com/WuWuyn/wuwuyn"
 icon = "github"
 
 [[config.home.connect]]

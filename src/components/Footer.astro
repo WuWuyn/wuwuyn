@@ -4,12 +4,17 @@ import { getSiteConfig } from '../data/site';
 
 const today = new Date();
 const { profile, site } = await getSiteConfig();
+const { showTemplateCredit = false } = Astro.props;
 const hasSocialLinks = Boolean(profile.website || profile.github || profile.email);
 ---
 
 <footer>
-  &copy; {today.getFullYear()}
-  {site.title}. {site.footerNote}
+  <p>&copy; {today.getFullYear()} {site.title}. {site.footerNote}</p>
+  {
+    showTemplateCredit && site.templateCredit && (
+      <p class="template-credit">{site.templateCredit}</p>
+    )
+  }
   {
     hasSocialLinks && (
       <div class="social-links">
@@ -41,6 +46,12 @@ const hasSocialLinks = Boolean(profile.website || profile.github || profile.emai
     color: var(--paper-ink-faint);
     font-size: 0.88rem;
     text-align: center;
+  }
+  p {
+    margin: 0;
+  }
+  .template-credit {
+    margin-top: 0.45rem;
   }
   .social-links {
     display: flex;

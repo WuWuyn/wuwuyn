@@ -17,7 +17,7 @@ interface Props {
 }
 
 const {
-  label = '轮播图',
+  label = 'Carousel',
   id = `carousel-${crypto.randomUUID()}`,
   autoplay = false,
   interval = 5000,
@@ -27,8 +27,8 @@ const {
   startIndex = 0,
   class: className,
   aspectRatio,
-  roleDescription = '轮播图',
-  slideRoleDescription = '幻灯片',
+  roleDescription = 'carousel',
+  slideRoleDescription = 'slide',
 } = Astro.props;
 ---
 
@@ -57,17 +57,27 @@ const {
     {
       showControls && (
         <div class="mdx-carousel__controls" data-carousel-controls>
-          <button type="button" class="mdx-carousel__button" data-carousel-prev aria-label="上一张">
+          <button
+            type="button"
+            class="mdx-carousel__button"
+            data-carousel-prev
+            aria-label="Previous slide"
+          >
             <ChevronLeft size={18} strokeWidth={1.8} aria-hidden="true" />
           </button>
-          <button type="button" class="mdx-carousel__button" data-carousel-next aria-label="下一张">
+          <button
+            type="button"
+            class="mdx-carousel__button"
+            data-carousel-next
+            aria-label="Next slide"
+          >
             <ChevronRight size={18} strokeWidth={1.8} aria-hidden="true" />
           </button>
         </div>
       )
     }
 
-    {showDots && <div class="mdx-carousel__dots" data-carousel-dots aria-label="选择幻灯片" />}
+    {showDots && <div class="mdx-carousel__dots" data-carousel-dots aria-label="Choose slide" />}
 
     {
       autoplay && (
@@ -75,7 +85,7 @@ const {
           type="button"
           class="mdx-carousel__button mdx-carousel__toggle"
           data-carousel-toggle
-          aria-label="暂停自动播放"
+          aria-label="Pause autoplay"
         >
           <Pause
             class="mdx-carousel__toggle-pause"

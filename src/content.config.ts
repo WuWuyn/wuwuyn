@@ -60,7 +60,7 @@ const defaultGiscusConfig = {
   emit_metadata: '0',
   input_position: 'bottom',
   theme: 'preferred_color_scheme',
-  lang: 'zh-CN',
+  lang: 'en',
   loading: 'lazy',
 };
 
@@ -73,7 +73,7 @@ const defaultUtterancesConfig = {
 
 const defaultWalineConfig = {
   server_url: '',
-  lang: 'zh-CN',
+  lang: 'en',
   dark: 'html.dark',
   pageview: true,
   comment: true,
@@ -122,6 +122,7 @@ const siteConfig = defineCollection({
       pageDescription: z.string(),
       repository: optionalUrlSchema,
       footerNote: z.string(),
+      templateCredit: z.string().optional().default(''),
     }),
     theme: z
       .object({
@@ -148,7 +149,7 @@ const siteConfig = defineCollection({
             emit_metadata: z.string().optional().default('0'),
             input_position: z.string().optional().default('bottom'),
             theme: z.string().optional().default('preferred_color_scheme'),
-            lang: z.string().optional().default('zh-CN'),
+            lang: z.string().optional().default('en'),
             loading: z.string().optional().default('lazy'),
           })
           .optional()
@@ -165,7 +166,7 @@ const siteConfig = defineCollection({
         waline: z
           .object({
             server_url: z.string().optional().default(''),
-            lang: z.string().optional().default('zh-CN'),
+            lang: z.string().optional().default('en'),
             dark: z.string().optional().default('html.dark'),
             pageview: z.boolean().optional().default(true),
             comment: z.boolean().optional().default(true),

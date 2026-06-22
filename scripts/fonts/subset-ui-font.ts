@@ -138,11 +138,16 @@ for (const file of lightweightContentFiles) {
 }
 
 const uiChars = [...chars].sort((a, b) => a.codePointAt(0)! - b.codePointAt(0)!).join('');
-if (!uiChars) throw new Error('No CJK UI characters were found for font subsetting.');
 
 mkdirSync(join(projectRoot, 'scripts/fonts'), { recursive: true });
 mkdirSync(join(projectRoot, 'src/assets/fonts'), { recursive: true });
 writeFileSync(uiCharsPath, `${uiChars}\n`, 'utf8');
+
+if (!uiChars) {
+  console.log(`Generated ${uiCharsPath} with 0 CJK UI characters.`);
+  console.log(`No font subset update is needed for English-only content; kept ${outputFontPath}.`);
+  process.exit(0);
+}
 
 if (!existsSync(sourceFontPath)) {
   throw new Error(

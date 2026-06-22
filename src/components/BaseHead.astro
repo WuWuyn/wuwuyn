@@ -52,7 +52,7 @@ const { site } = await getSiteConfig();
 
         nextRoot.dataset.theme = currentTheme;
         nextRoot.style.colorScheme = currentTheme;
-        nextThemeMeta?.setAttribute('content', currentTheme === 'dark' ? '#171b18' : '#fdfdf9');
+        nextThemeMeta?.setAttribute('content', currentTheme === 'dark' ? '#121826' : '#fbfdff');
       });
     }
   })();
@@ -83,7 +83,7 @@ const { site } = await getSiteConfig();
 
       root.dataset.theme = nextTheme;
       root.style.colorScheme = nextTheme;
-      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#171b18' : '#fdfdf9');
+      themeMeta()?.setAttribute('content', nextTheme === 'dark' ? '#121826' : '#fbfdff');
       for (const button of document.querySelectorAll('[data-theme-toggle]')) {
         button.setAttribute('aria-label', toggleLabel);
         button.setAttribute('title', toggleLabel);
@@ -127,7 +127,7 @@ const { site } = await getSiteConfig();
 <link rel="icon" type="image/png" href={withBasePath('images/avatar-cat.png')} />
 <link rel="apple-touch-icon" href={withBasePath('images/avatar-cat.png')} />
 <link rel="manifest" href={withBasePath('manifest.json')} />
-<meta name="theme-color" content="#fdfdf9" />
+<meta name="theme-color" content="#fbfdff" />
 <link rel="sitemap" href={withBasePath('sitemap-index.xml')} />
 <link
   rel="alternate"
