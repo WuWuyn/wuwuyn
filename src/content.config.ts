@@ -123,6 +123,7 @@ const siteConfig = defineCollection({
       repository: optionalUrlSchema,
       footerNote: z.string(),
       templateCredit: z.string().optional().default(''),
+      templateCreditHref: optionalUrlSchema,
     }),
     theme: z
       .object({

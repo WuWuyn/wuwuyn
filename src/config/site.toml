@@ -3,9 +3,10 @@ title = "wuwuyn"
 description = "Data Science, data analysis, and personal notes from wuwuyn."
 pageTitle = "wuwuyn | Personal Notebook"
 pageDescription = "A calm personal space for data notes, machine learning practice, and learning logs from wuwuyn."
-repository = "https://github.com/WuWuyn/wuwuyn"
+repository = "https://github.com/WuWuyn"
 footerNote = "A quiet personal notebook."
 templateCredit = "Template inspired by Astro Navfolio."
+templateCreditHref = "https://github.com/astro-navfolio/astro-navfolio"
 
 [config.theme]
 # Available palettes:

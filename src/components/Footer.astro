@@ -1,42 +1,20 @@
 ---
-import Icon from './Icon.astro';
 import { getSiteConfig } from '../data/site';
 
 const today = new Date();
-const { profile, site } = await getSiteConfig();
+const { site } = await getSiteConfig();
 const { showTemplateCredit = false } = Astro.props;
-const hasSocialLinks = Boolean(profile.website || profile.github || profile.email);
 ---
 
 <footer>
   <p>&copy; {today.getFullYear()} {site.title}. {site.footerNote}</p>
   {
     showTemplateCredit && site.templateCredit && (
-      <p class="template-credit">{site.templateCredit}</p>
-    )
-  }
-  {
-    hasSocialLinks && (
-      <div class="social-links">
-        {profile.website && (
-          <a href={profile.website} target="_blank" rel="noreferrer">
-            <span class="sr-only">Open website</span>
-            <Icon name="compass" size={18} />
-          </a>
-        )}
-        {profile.github && (
-          <a href={profile.github} target="_blank" rel="noreferrer">
-            <span class="sr-only">Open GitHub profile</span>
-            <Icon name="github" size={18} />
-          </a>
-        )}
-        {profile.email && (
-          <a href={`mailto:${profile.email}`}>
-            <span class="sr-only">Email</span>
-            <Icon name="mail" size={18} />
-          </a>
-        )}
-      </div>
+      <p class="template-credit">
+        <a href={site.templateCreditHref || '#'} target="_blank" rel="noreferrer">
+          {site.templateCredit}
+        </a>
+      </p>
     )
   }
 </footer>
@@ -53,21 +31,11 @@ const hasSocialLinks = Boolean(profile.website || profile.github || profile.emai
   .template-credit {
     margin-top: 0.45rem;
   }
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-    margin-top: 1em;
-  }
-  .social-links a {
-    display: inline-grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
+  .template-credit a {
     text-decoration: none;
-    color: var(--paper-ink-soft);
+    color: inherit;
   }
-  .social-links a:hover {
+  .template-credit a:hover {
     color: var(--paper-accent);
   }
 </style>
