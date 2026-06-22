@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-type ContentType = 'blog' | 'vibe';
+type ContentType = 'blog';
 type Extension = 'md' | 'mdx';
 
 type ContentTypeConfig = {
@@ -21,14 +21,6 @@ const CONTENT_TYPES = {
     fileName: (slug) => slug,
     bodyTemplate: createBlogBody,
     frontmatterTemplate: createBlogFrontmatter,
-  },
-  vibe: {
-    collectionName: 'vibe',
-    directory: 'src/content/vibe',
-    defaultExtension: 'md',
-    fileName: (slug, now) => `${formatDatePrefix(now)}-${slug}`,
-    bodyTemplate: createVibeBody,
-    frontmatterTemplate: createVibeFrontmatter,
   },
 } satisfies Record<ContentType, ContentTypeConfig>;
 
@@ -78,7 +70,7 @@ console.log(`Created new ${config.collectionName} file:`);
 console.log(relativePath);
 
 function isSupportedContentType(value: string | undefined): value is ContentType {
-  return value === 'blog' || value === 'vibe';
+  return value === 'blog';
 }
 
 function normalizeFilename(value: string): string {
@@ -106,10 +98,6 @@ function createTitle(slug: string): string {
     .join(' ');
 }
 
-function formatDatePrefix(date: Date): string {
-  return date.toISOString().slice(0, 10);
-}
-
 function createBlogFrontmatter(title: string, isoDate: string): string {
   return `---
 title: "${escapeYamlString(title)}"
@@ -126,30 +114,10 @@ sidebar:
 ---`;
 }
 
-function createVibeFrontmatter(title: string, isoDate: string): string {
-  return `---
-title: "${escapeYamlString(title)}"
-date: "${isoDate}"
-updatedDate: "${isoDate}"
-draft: true
-type: text
-mood: ""
-location: ""
-images: []
-tags: []
-align: left
-size: md
----`;
-}
-
 function createBlogBody(title: string): string {
   return `# ${title}
 
 Start writing here.`;
-}
-
-function createVibeBody(): string {
-  return 'A small note from today.';
 }
 
 function escapeYamlString(value: string): string {
@@ -160,14 +128,12 @@ function printMissingFilename(): void {
   console.error(`Please provide a filename.
 
 Examples:
-bun run post:new my-first-post
-bun run vibe:new today-cloud`);
+npm run post:new -- my-first-post`);
 }
 
 function printUnsupportedContentType(contentType: string | undefined): void {
   console.error(`Unsupported content type: ${contentType ?? ''}
 
 Supported types:
-- blog
-- vibe`);
+- blog`);
 }

@@ -2,9 +2,9 @@ type TocLink = HTMLAnchorElement;
 type TocRoot = HTMLElement;
 
 type TocWindow = Window & {
-  __navfolioTocSpyCleanup?: () => void;
-  __navfolioTocSpyEvents?: boolean;
-  __navfolioTocSpyPageKey?: string;
+  __wuwuynTocSpyCleanup?: () => void;
+  __wuwuynTocSpyEvents?: boolean;
+  __wuwuynTocSpyPageKey?: string;
 };
 
 import { buildHashIdCandidates, normalizeHash, normalizeIdValue } from './toc-hash';
@@ -107,7 +107,7 @@ const setActiveLink = (activeHash: string): void => {
   }
 };
 
-const initNavfolioToc = (): (() => void) | null => {
+const initWuwuynToc = (): (() => void) | null => {
   if (getTocLinks().length === 0) {
     return null;
   }
@@ -289,31 +289,31 @@ const initNavfolioToc = (): (() => void) | null => {
   };
 };
 
-export const mountNavfolioTocSpy = (): void => {
+export const mountWuwuynTocSpy = (): void => {
   const tocWindow = window as TocWindow;
   const cleanupCurrent = () => {
-    tocWindow.__navfolioTocSpyCleanup?.();
-    tocWindow.__navfolioTocSpyCleanup = undefined;
-    tocWindow.__navfolioTocSpyPageKey = undefined;
+    tocWindow.__wuwuynTocSpyCleanup?.();
+    tocWindow.__wuwuynTocSpyCleanup = undefined;
+    tocWindow.__wuwuynTocSpyPageKey = undefined;
   };
 
   const mountCurrentPage = () => {
     const pageKey = `${window.location.pathname}${window.location.search}`;
-    if (tocWindow.__navfolioTocSpyPageKey === pageKey) {
+    if (tocWindow.__wuwuynTocSpyPageKey === pageKey) {
       return;
     }
 
     cleanupCurrent();
 
-    const cleanup = initNavfolioToc();
+    const cleanup = initWuwuynToc();
     if (cleanup) {
-      tocWindow.__navfolioTocSpyCleanup = cleanup;
-      tocWindow.__navfolioTocSpyPageKey = pageKey;
+      tocWindow.__wuwuynTocSpyCleanup = cleanup;
+      tocWindow.__wuwuynTocSpyPageKey = pageKey;
     }
   };
 
-  if (!tocWindow.__navfolioTocSpyEvents) {
-    tocWindow.__navfolioTocSpyEvents = true;
+  if (!tocWindow.__wuwuynTocSpyEvents) {
+    tocWindow.__wuwuynTocSpyEvents = true;
     document.addEventListener('astro:page-load', mountCurrentPage);
     document.addEventListener('astro:before-swap', cleanupCurrent);
     window.addEventListener('pagehide', cleanupCurrent);

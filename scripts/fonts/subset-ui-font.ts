@@ -4,12 +4,12 @@ import { extname, join } from 'node:path';
 
 const projectRoot = process.cwd();
 const uiCharsPath = join(projectRoot, 'scripts/fonts/ui-chars.txt');
-const outputFontPath = join(projectRoot, 'public/fonts/lxgw-ui-subset.woff2');
-const sourceFontPath = join(projectRoot, 'public/fonts/LXGWWenKai-Regular.ttf');
+const outputFontPath = join(projectRoot, 'src/assets/fonts/lxgw-ui-subset.woff2');
+const sourceFontPath = join(projectRoot, 'src/assets/fonts/LXGWWenKai-Regular.ttf');
 
 const sourceDirs = ['src/pages', 'src/components', 'src/layouts', 'src/config'];
-const contentFrontmatterDirs = ['src/content/blog', 'src/content/projects', 'src/content/vibe'];
-const lightweightContentDirs = ['src/content/vibe'];
+const contentFrontmatterDirs = ['src/content/blog', 'src/content/projects'];
+const lightweightContentDirs: string[] = [];
 const lightweightContentFiles = ['src/content/about.mdx', 'src/content/projects/index.mdx'];
 const sourceExtensions = new Set(['.astro', '.ts', '.js', '.mjs', '.cjs', '.json', '.toml']);
 const frontmatterExtensions = new Set(['.md', '.mdx']);
@@ -91,12 +91,19 @@ function runSubset() {
   ];
 
   for (const { command, args: commandArgs } of commands) {
-    const result = spawnSync(command, commandArgs, { stdio: 'inherit' });
+    const result = spawnSync(command, commandArgs, { encoding: 'utf8' });
     if (result.status === 0) {
-      return;
+      if (result.stdout) process.stdout.write(result.stdout);
+      if (result.stderr) process.stderr.write(result.stderr);
+      return 'generated';
     }
 
     if (result.error && 'code' in result.error && result.error.code === 'ENOENT') continue;
+  }
+
+  if (existsSync(outputFontPath)) {
+    console.log(`Unable to run fonttools; keeping existing subset font at ${outputFontPath}.`);
+    return 'kept';
   }
 
   throw new Error(
@@ -134,16 +141,20 @@ const uiChars = [...chars].sort((a, b) => a.codePointAt(0)! - b.codePointAt(0)!)
 if (!uiChars) throw new Error('No CJK UI characters were found for font subsetting.');
 
 mkdirSync(join(projectRoot, 'scripts/fonts'), { recursive: true });
-mkdirSync(join(projectRoot, 'public/fonts'), { recursive: true });
+mkdirSync(join(projectRoot, 'src/assets/fonts'), { recursive: true });
 writeFileSync(uiCharsPath, `${uiChars}\n`, 'utf8');
 
 if (!existsSync(sourceFontPath)) {
   throw new Error(
-    'LXGW WenKai source font not found. Place the full font at public/fonts/LXGWWenKai-Regular.ttf.',
+    'LXGW WenKai source font not found. Place the full font at src/assets/fonts/LXGWWenKai-Regular.ttf.',
   );
 }
 
-runSubset();
+const subsetStatus = runSubset();
 
 console.log(`Generated ${uiCharsPath} with ${uiChars.length} CJK UI characters.`);
-console.log(`Generated ${outputFontPath} from ${sourceFontPath}.`);
+if (subsetStatus === 'generated') {
+  console.log(`Generated ${outputFontPath} from ${sourceFontPath}.`);
+} else {
+  console.log(`Kept ${outputFontPath}.`);
+}

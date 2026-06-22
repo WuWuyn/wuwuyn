@@ -6,7 +6,7 @@
 @import './palettes.css';
 @font-face {
   font-family: 'LXGW UI Subset';
-  src: url('/fonts/lxgw-ui-subset.woff2') format('woff2');
+  src: url('../assets/fonts/lxgw-ui-subset.woff2') format('woff2');
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'LXGW WenKai Full';
-  src: url('/fonts/LXGWWenKai-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/LXGWWenKai-Regular.ttf') format('truetype');
   font-style: normal;
   font-weight: 400;
   font-display: swap;

@@ -45,7 +45,6 @@ function isActive(href: string) {
 const routeLabels: Record<string, string> = {
   '/blog': 'blog',
   '/projects': 'projects',
-  '/vibe': 'vibe',
   '/archive': 'archive',
   '/about': 'about',
 };
@@ -68,7 +67,12 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
     <Menu size={18} stroke-width={2} />
   </button>
 
-  <a class="brand" href={withBase('/')} aria-label={`Go to ${site.title} home`}>
+  <a
+    class="brand"
+    href={withBase('/')}
+    aria-label={`Go to ${site.title} home`}
+    data-astro-prefetch="hover"
+  >
     <span class="brand-mark" aria-hidden="true"></span>
     <span class="brand-title">
       <span>{site.title}</span>
@@ -88,7 +92,11 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
             {link.label}
           </span>
         ) : (
-          <a class:list={['nav-link', { active: isActive(link.href) }]} href={withBase(link.href)}>
+          <a
+            class:list={['nav-link', { active: isActive(link.href) }]}
+            href={withBase(link.href)}
+            data-astro-prefetch="hover"
+          >
             {link.label}
           </a>
         ),
@@ -113,6 +121,7 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
             class:list={['mobile-menu-link', { active: isActive(link.href) }]}
             href={withBase(link.href)}
             data-mobile-menu-link
+            data-astro-prefetch="hover"
           >
             {link.label}
           </a>
@@ -122,15 +131,19 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
   </nav>
 
   <div class="nav-actions" aria-label="Page actions">
-    <a
-      href={site.repository}
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Open GitHub repository"
-      title="GitHub"
-    >
-      <Github size={17} stroke-width={2} />
-    </a>
+    {
+      site.repository && (
+        <a
+          href={site.repository}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open GitHub repository"
+          title="GitHub"
+        >
+          <Github size={17} stroke-width={2} />
+        </a>
+      )
+    }
     <button type="button" data-theme-toggle aria-label="Switch theme">
       <Moon class="theme-icon-moon" size={17} stroke-width={2} />
       <Sun class="theme-icon-sun" size={17} stroke-width={2} />
@@ -179,8 +192,19 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
 </header>
 
 <script>
+  let topNavAbortController: AbortController | null = null;
+
+  const getTopNavSignal = () => {
+    if (!topNavAbortController || topNavAbortController.signal.aborted) {
+      topNavAbortController = new AbortController();
+    }
+
+    return topNavAbortController.signal;
+  };
+
   const initMobileTopNav = () => {
     for (const header of document.querySelectorAll<HTMLElement>('.blog-top-nav')) {
+      const signal = getTopNavSignal();
       const toggle = header.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
       const menu = header.querySelector<HTMLElement>('[data-mobile-menu]');
       const tocTrigger = header.querySelector<HTMLButtonElement>('[data-mobile-toc-trigger]');
@@ -235,13 +259,21 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
 
             scrollFrame = window.requestAnimationFrame(updateNavVisibility);
           },
-          { passive: true },
+          { passive: true, signal },
         );
 
-        window.addEventListener('resize', () => {
-          if (window.scrollY <= topRevealOffset) {
-            setNavHidden(false);
-          }
+        window.addEventListener(
+          'resize',
+          () => {
+            if (window.scrollY <= topRevealOffset) {
+              setNavHidden(false);
+            }
+          },
+          { signal },
+        );
+
+        signal.addEventListener('abort', () => window.cancelAnimationFrame(scrollFrame), {
+          once: true,
         });
 
         setNavHidden(false);
@@ -271,54 +303,79 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
           );
         };
 
-        toggle.addEventListener('click', () => {
-          const nextOpen = header.dataset.mobileMenuOpen !== 'true';
-          setMenuOpen(nextOpen);
-          header.dataset.navHidden = 'false';
-          if (nextOpen) {
-            setTocOpen(false);
-          }
-        });
+        toggle.addEventListener(
+          'click',
+          () => {
+            const nextOpen = header.dataset.mobileMenuOpen !== 'true';
+            setMenuOpen(nextOpen);
+            header.dataset.navHidden = 'false';
+            if (nextOpen) {
+              setTocOpen(false);
+            }
+          },
+          { signal },
+        );
 
-        menu.addEventListener('click', (event) => {
-          if ((event.target as Element).closest?.('[data-mobile-menu-link]')) {
-            setMenuOpen(false);
-          }
-        });
+        menu.addEventListener(
+          'click',
+          (event) => {
+            if ((event.target as Element).closest?.('[data-mobile-menu-link]')) {
+              setMenuOpen(false);
+            }
+          },
+          { signal },
+        );
 
-        tocTrigger?.addEventListener('click', () => {
-          const nextOpen = header.dataset.mobileTocOpen !== 'true';
-          setTocOpen(nextOpen);
-          header.dataset.navHidden = 'false';
-          if (nextOpen) {
-            setMenuOpen(false);
-          }
-        });
+        tocTrigger?.addEventListener(
+          'click',
+          () => {
+            const nextOpen = header.dataset.mobileTocOpen !== 'true';
+            setTocOpen(nextOpen);
+            header.dataset.navHidden = 'false';
+            if (nextOpen) {
+              setMenuOpen(false);
+            }
+          },
+          { signal },
+        );
 
-        tocMenu?.addEventListener('click', (event) => {
-          if ((event.target as Element).closest?.('[data-nav-toc-link]')) {
-            setTocOpen(false);
-          }
-        });
+        tocMenu?.addEventListener(
+          'click',
+          (event) => {
+            if ((event.target as Element).closest?.('[data-nav-toc-link]')) {
+              setTocOpen(false);
+            }
+          },
+          { signal },
+        );
 
-        document.addEventListener('click', (event) => {
-          if (!header.contains(event.target as Node)) {
-            setMenuOpen(false);
-            setTocOpen(false);
-          }
-        });
+        document.addEventListener(
+          'click',
+          (event) => {
+            if (!header.contains(event.target as Node)) {
+              setMenuOpen(false);
+              setTocOpen(false);
+            }
+          },
+          { signal },
+        );
 
-        document.addEventListener('keydown', (event) => {
-          if (event.key === 'Escape') {
-            setMenuOpen(false);
-            setTocOpen(false);
-          }
-        });
+        document.addEventListener(
+          'keydown',
+          (event) => {
+            if (event.key === 'Escape') {
+              setMenuOpen(false);
+              setTocOpen(false);
+            }
+          },
+          { signal },
+        );
       }
     }
   };
 
   initMobileTopNav();
+  document.addEventListener('astro:before-swap', () => topNavAbortController?.abort());
   document.addEventListener('astro:page-load', initMobileTopNav);
 </script>
 

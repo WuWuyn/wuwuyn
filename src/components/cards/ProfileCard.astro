@@ -1,5 +1,6 @@
 ---
 import Icon from '../Icon.astro';
+import { withBasePath } from '../../utils/base-path';
 
 interface Profile {
   name: string;
@@ -19,8 +20,8 @@ const { profile } = Astro.props as { profile: Profile };
 <article class="profile-card">
   <div class="avatar-wrap">
     <img
-      src={profile.avatar}
-      alt={`${profile.name} GitHub avatar`}
+      src={withBasePath(profile.avatar)}
+      alt={`${profile.name} avatar`}
       width="176"
       height="176"
       loading="eager"

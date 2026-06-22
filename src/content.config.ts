@@ -102,6 +102,9 @@ const linkSchema = z.object({
   disabled: z.boolean().optional().default(false),
 });
 
+const optionalUrlSchema = z.union([z.string().url(), z.literal('')]);
+const optionalEmailSchema = z.union([z.string().email(), z.literal('')]);
+
 const navigationItemSchema = z.object({
   icon: z.string(),
   title: z.string(),
@@ -117,15 +120,9 @@ const siteConfig = defineCollection({
       description: z.string(),
       pageTitle: z.string(),
       pageDescription: z.string(),
-      repository: z.string().url(),
+      repository: optionalUrlSchema,
       footerNote: z.string(),
     }),
-    vibe: z
-      .object({
-        showTrail: z.boolean().optional().default(true),
-      })
-      .optional()
-      .default({ showTrail: true }),
     theme: z
       .object({
         palette: paletteSchema.optional().default('green-soft'),
@@ -184,9 +181,9 @@ const siteConfig = defineCollection({
       role: z.string(),
       company: z.string(),
       location: z.string(),
-      email: z.string().email(),
-      website: z.string().url(),
-      github: z.string().url(),
+      email: optionalEmailSchema,
+      website: optionalUrlSchema,
+      github: optionalUrlSchema,
       meta: z.string(),
       avatar: z.string(),
     }),
@@ -247,12 +244,6 @@ const siteConfig = defineCollection({
         }),
       navigation: z.array(navigationItemSchema),
       connect: z.array(linkSchema.required({ icon: true })),
-      doing: z.array(
-        z.object({
-          text: z.string(),
-          mark: z.string(),
-        }),
-      ),
     }),
   }),
 });
@@ -274,22 +265,4 @@ const projects = defineCollection({
   schema: articleSchema,
 });
 
-const vibe = defineCollection({
-  loader: glob({ base: './src/content/vibe', pattern: '**/*.{md,mdx}' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string().optional(),
-      date: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      draft: z.boolean().optional().default(false),
-      type: z.enum(['text', 'photo', 'quote', 'code', 'mixed']).optional().default('text'),
-      mood: z.string().optional(),
-      location: z.string().optional(),
-      images: z.array(contentImageSchema({ image })).optional().default([]),
-      tags: z.array(z.string()).optional().default([]),
-      align: z.enum(['left', 'right', 'center']).optional(),
-      size: z.enum(['sm', 'md', 'lg']).optional().default('md'),
-    }),
-});
-
-export const collections = { about, blog, projects, vibe, siteConfig };
+export const collections = { about, blog, projects, siteConfig };

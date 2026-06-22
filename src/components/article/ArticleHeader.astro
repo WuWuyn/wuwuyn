@@ -1,39 +1,28 @@
 ---
 import SmartImage from '../SmartImage.astro';
-import PageView from '../comments/PageView.astro';
 import FormattedDate from '../FormattedDate.astro';
 
 interface Props {
   title: string;
   description?: string;
   date?: Date;
-  wordCount: number;
   readingTime: string;
-  tags?: string[];
   heroImage?: ImageMetadata | string;
   showHeroImage?: boolean;
   variant?: 'default' | 'archive';
   kicker?: string;
-  pathname?: string;
-  showPageView?: boolean;
 }
 
 const {
   title,
   description,
   date,
-  wordCount,
   readingTime,
-  tags = [],
   heroImage,
   showHeroImage = true,
   variant = 'default',
   kicker = 'Notebook entry',
-  pathname = Astro.url.pathname,
-  showPageView = false,
 } = Astro.props;
-const wordCountLabel = `${wordCount.toLocaleString('en-US')} words`;
-const hasTags = tags.length > 0;
 const isArchiveHeader = variant === 'archive';
 ---
 
@@ -51,20 +40,11 @@ const isArchiveHeader = variant === 'archive';
           <h1 class="archive-title">{title}</h1>
           <div class="meta-line" aria-label="Article metadata">
             {date && (
-              <span class="meta-item">
-                <FormattedDate date={date} />
-              </span>
-            )}
-            <span class="meta-item">{wordCountLabel}</span>
+            <span class="meta-item">
+              <FormattedDate date={date} />
+            </span>
+          )}
             <span class="meta-item">{readingTime}</span>
-            {showPageView && <PageView pathname={pathname} />}
-            {hasTags && (
-              <span class="meta-item tag-list">
-                {tags.map((tag) => (
-                  <span class="tag">#{tag}</span>
-                ))}
-              </span>
-            )}
           </div>
         </div>
         {description && <p class="archive-note">{description}</p>}
@@ -79,16 +59,7 @@ const isArchiveHeader = variant === 'archive';
               <FormattedDate date={date} />
             </span>
           )}
-          <span class="meta-item">{wordCountLabel}</span>
           <span class="meta-item">{readingTime}</span>
-          {showPageView && <PageView pathname={pathname} />}
-          {hasTags && (
-            <span class="meta-item tag-list">
-              {tags.map((tag) => (
-                <span class="tag">#{tag}</span>
-              ))}
-            </span>
-          )}
         </div>
       </>
     )
@@ -155,17 +126,6 @@ const isArchiveHeader = variant === 'archive';
     color: var(--paper-ink-faint);
     content: '\00b7';
     opacity: 0.7;
-  }
-
-  .tag-list {
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .tag {
-    color: var(--paper-accent);
-    font-family: var(--font-serif-cn);
-    font-weight: 700;
   }
 
   .article-hero-image {

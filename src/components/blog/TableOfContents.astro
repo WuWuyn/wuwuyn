@@ -68,9 +68,9 @@ const listId = collapsible ? 'mobile-article-toc-list' : undefined;
 }
 
 <script>
-  import { mountNavfolioTocSpy } from '../../utils/toc-spy';
+  import { mountWuwuynTocSpy } from '../../utils/toc-spy';
 
-  mountNavfolioTocSpy();
+  mountWuwuynTocSpy();
 
   const initMobileTocToggle = () => {
     for (const toc of document.querySelectorAll<HTMLElement>('[data-mobile-toc]')) {
@@ -211,7 +211,7 @@ const listId = collapsible ? 'mobile-article-toc-list' : undefined;
     transform: translate(-50%, -50%) scale(0.7);
     opacity: 0;
     color: var(--paper-surface);
-    content: '✓';
+    content: '\2713';
     font-size: 0.56rem;
     font-weight: 900;
     line-height: 1;

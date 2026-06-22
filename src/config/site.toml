@@ -1,13 +1,10 @@
 [config.site]
-title = "navfolio"
-description = "A personal navigation portfolio starter built with Astro."
-pageTitle = "navfolio | Digital Publication Space"
-pageDescription = "A calm AI-native personal publication space for notes, links, and writing."
-repository = "https://github.com/dodolalorc/astro-navfolio"
-footerNote = "Released as an open-source starter."
-
-[config.vibe]
-showTrail = true
+title = "wuwuyn"
+description = "Data Science, data analysis, and personal notes from wuwuyn."
+pageTitle = "wuwuyn | Personal Notebook"
+pageDescription = "A calm personal space for data notes, machine learning practice, and learning logs from wuwuyn."
+repository = ""
+footerNote = "A quiet personal notebook."
 
 [config.theme]
 # Available palettes:
@@ -15,31 +12,31 @@ showTrail = true
 palette = "green-soft"
 
 [config.comments]
-enabled = true
-provider = "giscus"
-show_on_posts = true
+enabled = false
+provider = "none"
+show_on_posts = false
 
 [config.search]
 enabled = true
 shortcut = "mod+k"
-placeholder = "Search notes..."
+placeholder = "Search wuwuyn..."
 maxResults = 6
 
 [config.blog]
 postsPerPage = 6
 
 [config.comments.giscus]
-repo = "dodolalorc/astro-navfolio"
-repo_id = "R_kgDOSaQejw"
-category = "Announcements"
-category_id = "DIC_kwDOSaQej84C9di9"
+repo = ""
+repo_id = ""
+category = ""
+category_id = ""
 mapping = "pathname"
 strict = "0"
 reactions_enabled = "1"
 emit_metadata = "0"
 input_position = "top"
 theme = "preferred_color_scheme"
-lang = "zh-CN"
+lang = "vi"
 loading = "lazy"
 
 [config.comments.utterances]
@@ -50,22 +47,22 @@ theme = "github-light"
 
 [config.comments.waline]
 server_url = ""
-lang = "zh-CN"
+lang = "vi"
 dark = "html.dark"
 pageview = true
 comment = true
 
 [config.profile]
-name = "navfolio"
-handle = "@navfolio"
-role = "A Cat Developer"
-company = "Independent Studio"
-location = "Remote"
-email = "hello@navfolio.site"
-website = "https://astro.navfolio.site/"
-github = "https://github.com/dodolalorc/astro-navfolio"
-meta = "Open-source maintainer"
-avatar = "/images/logo.png"
+name = "wuwuyn"
+handle = "@wuwuyn"
+role = "Data Science & Machine Learning"
+company = ""
+location = ""
+email = ""
+website = ""
+github = "https://github.com/WuWuyn"
+meta = "Data analysis, machine learning, personal projects"
+avatar = "images/avatar-cat.png"
 
 [[config.topNav.links]]
 label = "Home"
@@ -80,10 +77,6 @@ label = "Projects"
 href = "/projects"
 
 [[config.topNav.links]]
-label = "Vibe"
-href = "/vibe"
-
-[[config.topNav.links]]
 label = "About"
 href = "/about"
 
@@ -91,21 +84,18 @@ href = "/about"
 layout = "grid"
 
 [config.home.quote]
-text = ["Navigate your world,", "Showcase your story,", "and keep everything in one place."]
-image = "/images/logo-with-name.png"
+text = ["keep it quiet,", "write it down,", "let the small things stay."]
+image = "images/avatar-cat.png"
 
 [config.home.intro]
-title = "here is navfolio"
-name = "navfolio"
+title = "here is wuwuyn"
+name = "wuwuyn"
 body = [
-  "The name combines \"Navigation\" and \"Portfolio\".",
-  "Navfolio prioritizes lightweight organization, seamless reading, and developer-friendly aesthetics.",
-  "It’s less a resume than a personal OS for your ideas, projects, notes, and online presence.",
-  "这个名字融合了“导航”与“作品集”。",
-  "Navfolio 专注于轻量级组织、流畅的阅读体验，以及对开发者友好的美学设计。",
-  "它不像一份简历，更像是一个属于你自己的个人操作系统——承载想法、项目、笔记与网络足迹。",
+  "I am interested in Data Science, data analysis, machine learning, and turning ideas into useful personal projects.",
+  "This space keeps learning notes, project traces, data analysis ideas, and small discoveries in one readable place.",
+  "I like exploring new technologies and documenting what I learn along the way."
 ]
-image = "/images/logo-cat.png"
+image = "images/avatar-cat.png"
 
 [config.home.latest]
 count = 1
@@ -116,38 +106,27 @@ startDate = ""
 dateArchiveBaseHref = ""
 
 [[config.home.navigation]]
-icon = "compass"
-title = "Portfolio"
-subtitle = "Selected work and case studies"
-href = "https://astro.navfolio.site/"
-
-[[config.home.navigation]]
 icon = "pen"
 title = "Blog"
-subtitle = "Essays, notes, and field reports"
+subtitle = "Learning notes and longer thoughts"
 href = "/blog"
 
 [[config.home.navigation]]
-icon = "briefcase"
-title = "Resume"
-subtitle = "Career profile and experience"
-href = "https://github.com/dodolalorc/navfolio"
+icon = "repo"
+title = "Projects"
+subtitle = "Data, learning, and personal projects"
+href = "/projects"
 
 [[config.home.navigation]]
-icon = "github"
-title = "Open Source"
-subtitle = "Code, experiments, and tools"
-href = "https://github.com/dodolalorc/astro-navfolio"
+icon = "compass"
+title = "About"
+subtitle = "A short note about this space"
+href = "/about"
 
 [[config.home.connect]]
 label = "GitHub"
-href = "https://github.com/dodolalorc/astro-navfolio"
+href = "https://github.com/WuWuyn"
 icon = "github"
-
-[[config.home.connect]]
-label = "Website"
-href = "https://astro.navfolio.site/"
-icon = "compass"
 
 [[config.home.connect]]
 label = "Blog"
@@ -160,26 +139,6 @@ href = "/projects"
 icon = "repo"
 
 [[config.home.connect]]
-label = "Email"
-href = "mailto:hello@navfolio.site"
-icon = "mail"
-
-[[config.home.doing]]
-text = "Shipping a personal dashboard template"
-mark = "01"
-
-[[config.home.doing]]
-text = "Writing reusable notes for future projects"
-mark = "02"
-
-[[config.home.doing]]
-text = "Improving static-site publishing workflow"
-mark = "03"
-
-[[config.home.doing]]
-text = "Collecting useful developer resources"
-mark = "04"
-
-[[config.home.doing]]
-text = "Exploring small open-source ideas"
-mark = "05"
+label = "About"
+href = "/about"
+icon = "compass"

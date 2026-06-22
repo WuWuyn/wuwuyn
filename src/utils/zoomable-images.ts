@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    __navfolioZoomableImagesReady?: boolean;
+    __wuwuynZoomableImagesReady?: boolean;
   }
 }
 
@@ -189,11 +189,11 @@ const openPreview = (sourceImage: HTMLImageElement) => {
 };
 
 export const initZoomableImages = () => {
-  if (window.__navfolioZoomableImagesReady) {
+  if (window.__wuwuynZoomableImagesReady) {
     return;
   }
 
-  window.__navfolioZoomableImagesReady = true;
+  window.__wuwuynZoomableImagesReady = true;
 
   document.addEventListener('click', (event) => {
     const image = getZoomTarget(event.target);

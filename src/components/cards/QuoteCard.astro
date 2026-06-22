@@ -1,4 +1,6 @@
 ---
+import { withBasePath } from '../../utils/base-path';
+
 interface Quote {
   text: string[];
   image: string;
@@ -13,7 +15,7 @@ const { quote } = Astro.props as { quote: Quote };
     {quote.text.map((line) => <span>{line}</span>)}
   </blockquote>
   <img
-    src={quote.image}
+    src={withBasePath(quote.image)}
     alt="desk workspace illustration"
     width="410"
     height="230"

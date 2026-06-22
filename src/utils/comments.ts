@@ -11,7 +11,7 @@ export function warnMissingCommentConfig(provider: CommentProvider, fields: stri
   }
 
   console.warn(
-    `[navfolio comments] ${provider} comments are enabled but missing required config: ${fields.join(
+    `[wuwuyn comments] ${provider} comments are enabled but missing required config: ${fields.join(
       ', ',
     )}. The comment block will not render for this page.`,
   );

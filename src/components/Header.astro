@@ -5,6 +5,7 @@ import Icon from './Icon.astro';
 
 const { profile, site, topNav } = await getSiteConfig();
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const hasSocialLinks = Boolean(profile.website || profile.github || profile.email);
 
 function withBase(href: string) {
   if (href === '/') {
@@ -21,20 +22,30 @@ function withBase(href: string) {
     <div class="internal-links">
       {topNav.links.map((link) => <HeaderLink href={link.href}>{link.label}</HeaderLink>)}
     </div>
-    <div class="social-links">
-      <a href={profile.website} target="_blank" rel="noreferrer">
-        <span class="sr-only">Open website</span>
-        <Icon name="compass" size={18} />
-      </a>
-      <a href={profile.github} target="_blank" rel="noreferrer">
-        <span class="sr-only">Open GitHub profile</span>
-        <Icon name="github" size={18} />
-      </a>
-      <a href={`mailto:${profile.email}`}>
-        <span class="sr-only">Email</span>
-        <Icon name="mail" size={18} />
-      </a>
-    </div>
+    {
+      hasSocialLinks && (
+        <div class="social-links">
+          {profile.website && (
+            <a href={profile.website} target="_blank" rel="noreferrer">
+              <span class="sr-only">Open website</span>
+              <Icon name="compass" size={18} />
+            </a>
+          )}
+          {profile.github && (
+            <a href={profile.github} target="_blank" rel="noreferrer">
+              <span class="sr-only">Open GitHub profile</span>
+              <Icon name="github" size={18} />
+            </a>
+          )}
+          {profile.email && (
+            <a href={`mailto:${profile.email}`}>
+              <span class="sr-only">Email</span>
+              <Icon name="mail" size={18} />
+            </a>
+          )}
+        </div>
+      )
+    }
   </nav>
 </header>
 <style>

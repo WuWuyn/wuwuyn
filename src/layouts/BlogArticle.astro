@@ -70,10 +70,8 @@ const bodyText = 'body' in post && typeof post.body === 'string' ? post.body : d
 const englishWords = bodyText.match(/[A-Za-z0-9]+(?:['’-][A-Za-z0-9]+)*/g) ?? [];
 const cjkChars =
   bodyText.match(/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/gu) ?? [];
-const wordCount = englishWords.length + cjkChars.length;
 const readingMinutes = Math.max(1, Math.ceil(englishWords.length / 220 + cjkChars.length / 500));
 const readingTime = `${readingMinutes} min read`;
-const tags = post.data.tags ?? [];
 const renderedTocItems = headings
   .filter((heading) => heading.depth === 2 || heading.depth === 3)
   .map((heading) => ({ href: `#${heading.slug}`, label: heading.text }));
@@ -113,15 +111,11 @@ const hasSidebar = shouldRenderSidebar && hasToc;
             title={title}
             description={description}
             date={date}
-            wordCount={wordCount}
             readingTime={readingTime}
-            tags={tags}
             heroImage={heroImage}
             showHeroImage={showHeroImage}
             variant={props.headerVariant}
             kicker={props.headerKicker}
-            pathname={Astro.url.pathname}
-            showPageView={isBlogPost}
           />
 
           {

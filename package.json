@@ -1,5 +1,5 @@
 {
-  "name": "astro-navfolio",
+  "name": "wuwuyn",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -7,12 +7,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "fonts:ui": "bun scripts/fonts/subset-ui-font.ts",
-    "build": "bun run fonts:ui && astro build && pagefind --site dist --output-subdir pagefind --root-selector main --exclude-selectors \"[data-pagefind-ignore]\"",
+    "fonts:ui": "node scripts/fonts/subset-ui-font.ts",
+    "build": "npm run fonts:ui && astro build && pagefind --site dist --output-subdir pagefind --root-selector main --exclude-selectors \"[data-pagefind-ignore]\"",
     "preview": "astro preview",
     "astro": "astro",
-    "post:new": "bun scripts/new-content.ts blog",
-    "vibe:new": "bun scripts/new-content.ts vibe",
+    "post:new": "node scripts/new-content.ts blog",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -31,5 +30,8 @@
     "pagefind": "^1.5.2",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "^0.14.1"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }

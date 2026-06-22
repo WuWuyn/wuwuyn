@@ -1,6 +1,6 @@
 # Hi, I'm wuwuyn
 
-I'm interested in Data Science, web development, and turning ideas into useful projects.
+I'm interested in Data Science, data analysis, machine learning, and turning ideas into useful projects.
 
 [GitHub](https://github.com/WuWuyn)
 
@@ -9,5 +9,5 @@ I'm interested in Data Science, web development, and turning ideas into useful p
 - Name: **wuwuyn**
 - GitHub: **[@WuWuyn](https://github.com/WuWuyn)**
 - Currently exploring Data Science and building personal projects
-- Interested in data analysis, machine learning, and web development
+- Interested in data analysis, machine learning, and personal projects
 - Enjoy learning new technologies and documenting what I discover

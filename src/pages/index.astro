@@ -38,7 +38,7 @@ const { home, profile, site } = await getSiteConfig();
     </Fragment>
 
     <Fragment slot="recently">
-      <DoingCard items={home.doing} />
+      <DoingCard count={3} />
     </Fragment>
   </DashboardFlow>
 </BaseLayout>

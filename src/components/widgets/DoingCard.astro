@@ -1,26 +1,50 @@
 ---
+import { getCollection } from 'astro:content';
+import FormattedDate from '../FormattedDate.astro';
 import Icon from '../Icon.astro';
+import { sortByDateDesc } from '../../utils/content-dates';
 
-interface DoingItem {
-  text: string;
-  mark: string;
+interface Props {
+  count?: number;
 }
 
-const { items } = Astro.props as { items: DoingItem[] };
+const { count = 3 } = Astro.props;
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const posts = sortByDateDesc(await getCollection('blog', ({ data }) => !data.draft)).slice(
+  0,
+  count,
+);
+
+function withBase(href: string) {
+  if (href === '/') {
+    return `${basePath}/` || '/';
+  }
+
+  return `${basePath}${href.startsWith('/') ? href : `/${href}`}`;
+}
 ---
 
 <article class="glass-card doing-card">
   <h2><Icon name="calendar" /> Recently</h2>
-  <ul>
-    {
-      items.map((item) => (
-        <li>
-          <span>{item.text}</span>
-          <strong aria-hidden="true">{item.mark}</strong>
-        </li>
-      ))
-    }
-  </ul>
+  {
+    posts.length > 0 ? (
+      <ul>
+        {posts.map((post, index) => (
+          <li>
+            <a href={withBase(`/blog/${post.id}/`)}>
+              <span>{post.data.title}</span>
+              <strong aria-hidden="true">{String(index + 1).padStart(2, '0')}</strong>
+              <small>
+                <FormattedDate date={post.data.date} />
+              </small>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p>No posts yet.</p>
+    )
+  }
 </article>
 
 <style>
@@ -61,18 +85,21 @@ const { items } = Astro.props as { items: DoingItem[] };
   }
 
   li {
+    border-top: 1px solid var(--paper-line);
+  }
+
+  a {
     position: relative;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 32px;
-    gap: 12px;
+    gap: 4px 12px;
     align-items: center;
     padding: 14px 0 14px 18px;
-    border-top: 1px solid var(--paper-line);
     color: var(--paper-ink);
-    font-size: 0.98rem;
+    text-decoration: none;
   }
 
-  li::before {
+  a::before {
     position: absolute;
     left: 0;
     width: 5px;
@@ -82,8 +109,34 @@ const { items } = Astro.props as { items: DoingItem[] };
     content: '';
   }
 
+  a:hover span {
+    color: var(--paper-accent);
+  }
+
+  span {
+    min-width: 0;
+    overflow: hidden;
+    font-size: 0.98rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   strong {
+    color: var(--paper-ink-faint);
     font-size: 0.82rem;
     text-align: right;
+  }
+
+  small {
+    grid-column: 1 / -1;
+    color: var(--paper-ink-soft);
+    font-size: 0.78rem;
+  }
+
+  p {
+    margin: 0;
+    padding: 14px 0;
+    color: var(--paper-ink-soft);
+    font-size: 0.94rem;
   }
 </style>
