@@ -6,7 +6,7 @@ pageDescription = "A calm personal space for data notes, machine learning practi
 repository = "https://github.com/WuWuyn"
 footerNote = "A quiet personal notebook."
 templateCredit = "Template inspired by Astro Navfolio."
-templateCreditHref = "https://github.com/astro-navfolio/astro-navfolio"
+templateCreditHref = "https://astro.navfolio.site"
 
 [config.theme]
 # Available palettes:
